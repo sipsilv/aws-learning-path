@@ -2,3 +2,4 @@
 example.txt
 s3/random-files
 s3/iac/opentofu/.terraform
+node_modules
