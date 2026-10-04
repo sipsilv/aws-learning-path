@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+echo "--------> Listing the buckets" 
+
+aws s3api list-buckets 

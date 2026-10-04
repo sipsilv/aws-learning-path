@@ -1,0 +1,7 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: |
+  "Just something that I am learning rn"
+  
+Resources:
+  S3BUCKET:
+    Type: 'AWS::S3::Bucket'

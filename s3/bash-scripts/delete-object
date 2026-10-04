@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+    echo "Bucket name should be specified"
+    exit 1
+fi
+
+if [ -z "$2" ]; then
+    echo "file/key name should be specified"
+    exit 1
+fi
+
+
+BUCKET_NAME=$1
+KEY_NAME=$2
+
+aws s3api delete-object --bucket $1 --key $2
+echo "Deleted: file $2"

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+echo "Creating a cfn stack"
+
+STACK_NAME='cfn-s3-simple'
+
+aws cloudformation deploy \
+--template-file template.yaml \
+--no-execute-changeset \
+--region ap-south-2 \
+--stack-name $STACK_NAME
