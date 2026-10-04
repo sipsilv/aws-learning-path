@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+    echo "Usage: ./put-object <bucket-name> [number-of-files]"
+    exit 1
+fi
+
+BUCKET_NAME="$1"
+COUNT="${2:-5}"
+
+for ((i=1; i<=COUNT; i++)); do
+    FILE_NAME="random-$RANDOM-$i.txt"
+    FILE_PATH="/tmp/$FILE_NAME"
+
+    # Generate random data inside the file
+    openssl rand -base64 1024 > "$FILE_PATH"
+
+    # Upload to S3
+    aws s3api put-object \
+        --bucket "$BUCKET_NAME" \
+        --key "$FILE_NAME" \
+        --body "$FILE_PATH"
+
+    echo "Uploaded: $FILE_NAME"
+
+    # Remove local temporary file
+    rm "$FILE_PATH"
+done
+
+echo "Done! Uploaded $COUNT random files to s3://$BUCKET_NAME"

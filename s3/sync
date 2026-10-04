@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+    echo "Usage: ./sync <bucket-name> [number-of-files]"
+    exit 1
+fi
+
+BUCKET_NAME="$1"
+COUNT="${2:-5}"
+DIR="./random-files"
+
+mkdir -p "$DIR"
+
+# Generate random files
+for ((i=1; i<=COUNT; i++)); do
+    FILE_NAME="random-$RANDOM-$i.txt"
+
+    openssl rand -base64 1024 > "$DIR/$FILE_NAME"
+
+    echo "Created: $FILE_NAME"
+done
+
+# Sync directory to S3
+echo "Syncing to s3://$BUCKET_NAME..."
+
+aws s3 sync "$DIR" "s3://$BUCKET_NAME"
+
+echo "Done!"
