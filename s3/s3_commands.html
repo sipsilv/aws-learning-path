@@ -1,5 +1,5 @@
 <h1> Upload the file to ur bucket </h1>
-aws s3 cp .\example.txt s3://silv-bucker-720561061087-ap-south-2-an/example.txt
+aws s3 cp .\example.txt s3://bucket-name/example.txt
 
 <h1> Create a bucket in a region with the name </h1>
 aws s3api create-bucket --bucket second-bucket-example-for-silv --region us-east-1
@@ -9,3 +9,6 @@ aws s3api list-buckets --query "Buckets[?Name =='second-bucket-example-for-silv'
 
 <h1> Delete a bucket </h1>
 aws s3api delete-bucket --bucket second-bucket-example-for-silv 
+
+<h1> get a file from a bucket </h1>
+aws s3api get-object --bucket bucket-name --key file-name-on-the-bucket.pdf output-file-name.pdf
